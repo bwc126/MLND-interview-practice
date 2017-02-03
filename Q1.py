@@ -1,16 +1,36 @@
 # Given two strings s and t, determine whether some anagram of t is a substring of s. For example: if s = "udacity" and t = "ad", then the function returns True. Your function definition should look like: question1(s, t) and return a boolean True or False.
 
 def question1(s,t):
-    if t in s:
+
+    s_list = list(s)
+    t_list = list(t)
+
+    s_list.sort()
+    t_list.sort()
+
+    print s_list, t_list
+
+    key = []
+
+    for letter in t_list:
+        if letter in s_list:
+            print letter
+            key.append(s.index(letter))
+
+    if len(key) > 0:
+        key.sort()
+        print key
+        for value in range(1,len(key)):
+            print value
+            if key[value] != key[value-1] + 1:
+                return False
         return True
-    def reverse(a):
-        return a[::-1]
-    if reverse(t) in s:
-        return True
-    else:
-        for position in range(len(t)):
-            if t[position]+reverse(t[position+1:position+2]) in s:
-                return True
+
+
+
+    print key
+    # if key in s:
+        # return True
     return False
 
 
