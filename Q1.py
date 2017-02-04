@@ -8,32 +8,32 @@ def question1(s,t):
     s_list.sort()
     t_list.sort()
 
-    print s_list, t_list
+    # print s_list, t_list
 
     key = []
 
     for letter in t_list:
         if letter in s_list:
-            print letter
+            # print letter
             key.append(s.index(letter))
 
     if len(key) > 0:
         key.sort()
-        print key
+        # print key
         for value in range(1,len(key)):
-            print value
+            # print value
             if key[value] != key[value-1] + 1:
                 return False
         return True
 
 
 
-    print key
-    # if key in s:
-        # return True
+    # print key
     return False
 
 
 print question1('udacity','da')
 print question1('udacity','ad')
 print question1('udacity','ciud')
+print question1('udacity','uy')
+print question1('udacity','cdaityu')
