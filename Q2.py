@@ -7,12 +7,12 @@ def question2(a):
 
     # Split the string in half, check if the reverse of this half is in the rest of the string
     def test(s, offset, width):
-        stop = int(math.floor(width/2))
+        stop = int(math.ceil(width/2))
         # print stop
         b = s[0+offset:stop+offset]
         c = s[stop+offset:width+offset]
         # print b, c
-        if b == c[::-1]:
+        if b in c[::-1]:
             return b+c
         else:
             return ''
@@ -32,12 +32,17 @@ def question2(a):
         offsets = len(a) - width + 1
         for offset in range(offsets):
             new_result = test(a, offset, width)
-        if len(new_result) < len(old_result):
+            # print 'exiting at ', offset, len(new_result), len(old_result)
+        if (len(new_result) < len(old_result)):
+            # print 'returning ', old_result
             return old_result
-        old_result = new_result
+        if (len(new_result) > len(old_result)):
+            # print 'setting new result', new_result
+            old_result = new_result
         width -= 1
-    return result
+    return old_result
 print question2('abab')
 print question2('avva')
 print question2('avcva')
-print question2('ls;dnfuewhrojaaajjaaaa;sdlkfnlk')
+print question2('racecar')
+print question2('ihaveafastracecar')
