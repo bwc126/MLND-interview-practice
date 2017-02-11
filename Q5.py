@@ -33,3 +33,13 @@ l_l.right.right.right.right = Node(4)
 print question5(l_l,4) # Should be 4
 print question5(l_l,2) # Should be 3
 print question5(l_l,0) # Should be 1
+
+c_c = Node(5)
+c_c.left = Node(3)
+c_c.left.left = Node(6)
+c_c.left.left.left = Node(12)
+c_c.left.left.left.left = Node(13)
+
+print question5(c_c,2) # Should be 6
+print question5(c_c,3) # Should be 12
+print question5(c_c,5) # Should be None
