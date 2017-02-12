@@ -1,48 +1,14 @@
 # Given two strings s and t, determine whether some anagram of t is a substring of s. For example: if s = "udacity" and t = "ad", then the function returns True. Your function definition should look like: question1(s, t) and return a boolean True or False.
 
 def question1(s,t):
-
-    s_list = list(s)
-    t_list = list(t)
-
-    s_list.sort()
-    t_list.sort()
-
-    # print s_list, t_list
-
-    key = []
+    # We can replace within s each character that's in t with some placeholder character (hyphen in this example), and then check to see if there's a string of placeholder characters within s that correspond to the length of t. Since we want all possible anagrams to be covered, any of the characters in t can be in any position within s, and as long as they're adjacent and there are at least as many in s as there are in t, we can confidently declare some anagram of t is within s.
     test = ''
     for char in t:
-        # print char
         s = s.replace(char, '-')
-        # print s
     for i in range(len(t)):
         test += '-'
-    # print test, s
     if test in s:
         return True
-
-    # for letter in t_list:
-    #     if letter in s_list:
-    #         # print letter
-    #         index = s.find(letter)
-    #         s = s[0:index] + '-' + s[index+1:len(s)]
-    #         print s
-    #
-    #         key.append(index)
-    #
-    # if len(key) > 0:
-    #     key.sort()
-    #     # print key
-    #     for value in range(1,len(key)):
-    #         # print value
-    #         if key[value] != key[value-1] + 1:
-    #             return False
-    #     return True
-
-
-
-    # print key
     return False
 
 
