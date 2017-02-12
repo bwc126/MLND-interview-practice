@@ -14,7 +14,7 @@ def question3(G):
     #  (1 0 1 0),
     #  (0 1 0 1),
     #  (0 0 1 0)]
-
+    # Since our number of operations scales only with the number of units in the diagonal, our complexity grows approximately linearly with n, so ~O(n). Except this wouldn't handle instances where the actual edge weights are lowest when the graph has some nodes with more than 2 connections. Also, we need to preserve the original edge weights, and find the lowest ones to use in our minimum spanning tree. **This might involve finding the lowest weights for each key, preserving only those, and then backfilling to make the graph list correct. **
 
     # Goal: return an adjacency dictionary of lists of tuples. Something like:
     # {'A': [('B', 1)],
@@ -30,7 +30,7 @@ graph_one = {'A': [('B', 3), ('C', 6), ('D', 4)],
              'D': [('A', 4), ('B', 9)]}
 question3(graph_one)
 # Should return something like
-    # {'A': [('B',1)],
-    #  'B': [('A',1), ('C', 1)],
-    #  'C': [('B', 1), ('D', 1)],
-    #  'D': [('C', 1)]}
+    # {'A': [('B',3), ('D', 4)],
+    #  'B': [('A',3), ('C', 2)],
+    #  'C': [('B', 2)],
+    #  'D': [('A', 4)]}
