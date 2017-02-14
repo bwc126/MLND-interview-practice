@@ -2,7 +2,7 @@
 
 import math
 
-def question2(a):
+def question2(a=''):
 # Steps might be:
 
     # Split the string in half, check if the reverse of this half is in the rest of the string
@@ -34,8 +34,12 @@ def question2(a):
             old_result = new_result
         width -= 1
     return old_result
-print question2('abab')
-print question2('avva')
-print question2('avcva')
-print question2('racecar')
-print question2('ihaveafastracecar')
+
+print question2('abab') # Should be 'bab'
+print question2('avva') # Should be 'avva'
+print question2('avcva') # Should be 'avcva'
+print question2('racecar') # Should be 'racecar'
+print question2('ihaveafastracecar') # Should be 'racecar'
+print question2('alsjsdfjhsdlkfhliearbfienflinlifiuhgleiuhhhgh') # Edge Case: Should be 'hgh'
+print question2('') # Edge Case: Should be ''
+print question2() # Edge Case: Should be ''

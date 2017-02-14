@@ -6,7 +6,7 @@
 #
 # Vertices are represented as unique strings. The function definition should be question3(G)
 
-def question3(G):
+def question3(G={}):
     # G is going to be a dictionary where keys are letters, values are lists of tuples. Each tuple has a letter for a node which connects to its key and an integer specifying its edge weight with that node.
     # We could build an adj. matrix, make sure the values on either side of the diagonal are ones, like below (for 'graph_one' example), then convert it back to an adjacency list.
     # [(0 2 0),
@@ -24,9 +24,8 @@ def question3(G):
                 min = weight
                 keeper = (node, weight)
         G[key] = [keeper]
-        print key, G[key]
 
-    # Back-fill any keys which don't have tuples corresponding to tuples that other keys have. We'd have to back-fill the C tuple within B to correspond to C's B tuple. Adjacency matrix might make this easier, as it would be a matter of reversing the coordinates for a position and making sure there's a corresponding value a that position. E.g., if there's a '3' at 1,2, there should be the same value at 2,1. This matrix can then be converted back to a list. Using only lists,  during the backfill step, for each key, we'd need to look up any other key in its tuple and see if it has a reference back to the parent key. For the present solution, a purely graph lists approach was used. 
+    # Back-fill any keys which don't have tuples corresponding to tuples that other keys have. We'd have to back-fill the C tuple within B to correspond to C's B tuple. Adjacency matrix might make this easier, as it would be a matter of reversing the coordinates for a position and making sure there's a corresponding value a that position. E.g., if there's a '3' at 1,2, there should be the same value at 2,1. This matrix can then be converted back to a list. Using only lists,  during the backfill step, for each key, we'd need to look up any other key in its tuple and see if it has a reference back to the parent key. For the present solution, a purely graph lists approach was used.
 
     # For each key, (hereafter the 'primary key') for each tuple (should be just one per primary key at this point), check the key named in that tuple, if that key lacks a reference to our primary key, we add it back using our primary key's tuple for the edge weight.
 
@@ -56,3 +55,6 @@ print question3(graph_one)
     #  'B': [('A',3), ('C', 2)],
     #  'C': [('B', 2)],
     #  'D': [('A', 4)]}
+graph_two = {}
+print question3(graph_two) # Edge Case: Should return {}
+print question3() # Edge Case: Should return {}

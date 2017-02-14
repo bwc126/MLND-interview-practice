@@ -10,7 +10,7 @@ Question 2
 Question 3
 
 For each key, find the lowest weight tuple. We'd keep the B tuple in A, the A tuple in B, the B tuple in C.
-Back-fill any keys which don't have tuples corresponding to tuples that other keys have. We'd have to back-fill the C tuple within B to correspond to C's B tuple. Adjacency matrix might make this easier, as it would be a matter of reversing the coordinates for a position and making sure there's a corresponding value a that position. E.g., if there's a '3' at 1,2, there should be the same value at 2,1. This matrix can then be converted back to a list. Using only lists,  during the backfill step, for each key, we'd need to look up any other key in its tuple and see if it has a reference back to the parent key. For the present solution, a purely graph lists approach was used. 
+Back-fill any keys which don't have tuples corresponding to tuples that other keys have. We'd have to back-fill the C tuple within B to correspond to C's B tuple. Adjacency matrix might make this easier, as it would be a matter of reversing the coordinates for a position and making sure there's a corresponding value a that position. E.g., if there's a '3' at 1,2, there should be the same value at 2,1. This matrix can then be converted back to a list. Using only lists,  during the backfill step, for each key, we'd need to look up any other key in its tuple and see if it has a reference back to the parent key. For the present solution, a purely graph lists approach was used.
 
 For each key, (hereafter the 'primary key') for each tuple (should be just one per primary key at this point), check the key named in that tuple, if that key lacks a reference to our primary key, we add it back using our primary key's tuple for the edge weight.
 
@@ -21,3 +21,5 @@ Question 4
 # Compare the lists of ancestors. We should return the first one that appears in both. We 'for' loop through one, check if it's in the other, and if it is, we return that value immediately, ending the function qeustion4().
 
 Question 5
+
+A linked list is essentially a maximally unbalanced binary tree, i.e., a series of nodes connected by single edges such that the very first and last nodes have only one edge, but all nodes in between them have exactly two edges, each connecting to a neighboring node in a chain. We can therefore build a linked list using just the Node class, and then begin with a 'root' and add neighbors exclusively to either the right or left side of the root and then exclusively that same side for each of its children. We'd have something like root.left.left.left.left and so on, or something similar for the right.  

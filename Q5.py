@@ -6,7 +6,6 @@ class Node(object):
         self.right = None
 
 def question5(ll, m):
-    # print ll, m
     output = 0
     def search_list(start, val):
         # print start.value, val
@@ -29,10 +28,12 @@ l_l.right = Node(2)
 l_l.right.right = Node(3)
 l_l.right.right.right = Node(5)
 l_l.right.right.right.right = Node(4)
+v = int()
 
 print question5(l_l,4) # Should be 4
 print question5(l_l,2) # Should be 3
 print question5(l_l,0) # Should be 1
+print question5(l_l, -1) # Edge case: should be None
 
 c_c = Node(5)
 c_c.left = Node(3)
@@ -42,4 +43,4 @@ c_c.left.left.left.left = Node(13)
 
 print question5(c_c,2) # Should be 6
 print question5(c_c,3) # Should be 12
-print question5(c_c,5) # Should be None
+print question5(c_c,5) # Edge case: Should be None

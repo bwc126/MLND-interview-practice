@@ -16,7 +16,8 @@
 # The signature question4(T, r, n1, n2) includes T, a binary matrix as described previously, r, a non-neg integer corresponding to the value of the root. n1, n2 are each non-neg ints representing the two nodes for which we need to find the greatest common ancestor node. We can assume n1, n2 might be in any order, that both nodes are in fact within the tree, and the BST conforms to standard rules for a BST.
 import copy
 def question4(T, r, n1, n2):
-
+    if not T:
+        return
     # Since r is the value of the root, we should look within T and find the list at that index value to see what children our root has. Ultimately, we need to find n1, n2's parents, and see if they're actually the same node, and if not, how far up the tree we need to look to find the greatest common ancestor for them. If the root is the immediate parent of n1,n2, then we've found our result. Otherwise, we need to keep moving up the tree until we find a parent node both n1,n2 have in common.
 
     # Start by discarding trivial rows, storing the remaining rows with their node value in a dictionary as a key, and a list of their children as values. 0: [1] would be one such dictionary entry for the example in the question definition.
@@ -31,6 +32,7 @@ def question4(T, r, n1, n2):
                 children.append(loc)
                 M[row][loc] = 0
             nodes[row] = children
+
     # print nodes
     # print T == M
     # We then recursively find all parents for each of n1, n2 all the way to the root.
@@ -52,6 +54,8 @@ def question4(T, r, n1, n2):
     # print a_1, a_2
 
     # Compare the lists of ancestors. We should return the first one that appears in both. We 'for' loop through one, check if it's in the other, and if it is, we return that value immediately, ending the function qeustion4().
+    if not a_1 or not a_2:
+        return
     for ancestor in a_1:
         if ancestor in a_2:
             return ancestor
@@ -78,7 +82,15 @@ matrix = [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], # 0
 root = 8
 n_1, n_2 = 4, 7
 print question4(matrix, root, n_1, n_2) # Should be 6
+
 n_3, n_4 = 1, 6
 print question4(matrix, root, n_3, n_4) # Should be 3
+
 n_5, n_6 = 4, 10
 print question4(matrix, root, n_5, n_6) # Should be 8
+
+n_7, n_8 = 16, 0
+print question4(matrix, root, n_7, n_8) # Edge case: should be None
+
+n_9, n_10 = 4, 10
+print question4(None, root, n_9, n_10) # Edge case: should be None
