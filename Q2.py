@@ -16,13 +16,6 @@ def question2(a):
             return b+c
         else:
             return ''
-        # d = b + c
-        # e = c + b
-        # print b, c, d, e
-        # if d in s:
-        #     return d
-        # if e in s:
-        #     return e
     # Do this recursively and iteratively with successively smaller substrings at different frames within the string until we've exahusted the possibilities for two letters
     result = ''
     width = len(a)
