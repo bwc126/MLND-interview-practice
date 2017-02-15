@@ -236,7 +236,6 @@ class Node(object):
 def question5(ll, m):
     output = 0
     def search_list(start, val):
-        # print start.value, val
         if val == 0:
             output = start.value
             return start.value
@@ -249,12 +248,12 @@ def question5(ll, m):
 
     return search_list(ll, m)
 
+# Test Cases
 l_l = Node(1)
 l_l.right = Node(2)
 l_l.right.right = Node(3)
 l_l.right.right.right = Node(5)
 l_l.right.right.right.right = Node(4)
-v = int()
 
 print question5(l_l,4) # Should be 4
 print question5(l_l,2) # Should be 3

@@ -2,24 +2,33 @@ Question 1
 
 We can replace within s each character that's in t with some placeholder character (hyphen in this example), and then check to see if there's a string of placeholder characters within s that correspond to the length of t. Since we want all possible anagrams of t to be covered, any of the characters in t can be in any position within s, and as long as they're adjacent in s and there are at least as many in s as there are in t, we can confidently declare some anagram of t is within s.
 
+Since we need to do computation for each letter in both s and t, our compute complexity is O(T*S), where T and S are the lengths of t and s. If we double the length of s, it will take twice as long to see if a letter is in it, and if we double the length of t, we'd have twice as many letters to look for during our replacement step. Our memory complexity is O(S), since we only need to actively store our mutated (with placeholders) parent string.
+
 Question 2
 
-# Split the string in half, check if the reverse of this half is in the rest of the string
-# Do this recursively and iteratively with successively smaller substrings at different frames within the string until we've exahusted the possibilities for two letters
+Essentially, we split the string in half, check if the reverse of this half is in the rest of the string. Do this recursively for smaller sub-lengths and iteratively with different frames within the string until we've exhausted the possibilities down to two letters across the entire length of the string. If at any point we find a palindrome, and then a smaller one, we immediately return the larger one because we know they're only going to get smaller from now on.
+
+Compute complexity is O(A^2) where A is the length of input a. If we imagine each new unit of length we need to check as a column, and each new frame we need to check as a row, adding a new letter to A effectively increases the area outlined by the number of rows and columns. Memory complexity is O(A), since the largest comparison string we'd need to hold onto is a constant ratio of A's original size.
 
 Question 3
 
 For each key, find the lowest weight tuple. We'd keep the B tuple in A, the A tuple in B, the B tuple in C.
-Back-fill any keys which don't have tuples corresponding to tuples that other keys have. We'd have to back-fill the C tuple within B to correspond to C's B tuple. Adjacency matrix might make this easier, as it would be a matter of reversing the coordinates for a position and making sure there's a corresponding value a that position. E.g., if there's a '3' at 1,2, there should be the same value at 2,1. This matrix can then be converted back to a list. Using only lists,  during the backfill step, for each key, we'd need to look up any other key in its tuple and see if it has a reference back to the parent key. For the present solution, a purely graph lists approach was used.
+Back-fill any keys which don't have tuples corresponding to tuples that other keys have. We'd have to back-fill the C tuple within B to correspond to C's B tuple.  Using only lists, during the backfill step, for each key, we'd need to look up any other key in its tuple and see if it has a reference back to the parent key.
 
-For each key, (hereafter the 'primary key') for each tuple (should be just one per primary key at this point), check the key named in that tuple, if that key lacks a reference to our primary key, we add it back using our primary key's tuple for the edge weight.
+For each key, (hereafter the 'primary key') for each tuple (should be just one per primary key at this point), check the key named in that tuple, if that key lacks a reference to our primary key, we add it back using our primary key's tuple for the edge weight. What we have is now the minimum number of edges and the minimum total weight necessary to connect all nodes in the original graph.
+
+Compute complexity is O(n*W), where n is the number of nodes and W is the number of weights. If we were to double our node number, we'd have about twice as many computations to do, and if we doubled our number of weights or edges, we'd also have about twice as much computation to do. Memory complexity is O(n), since we'll basically just have one weight per node that we'll hang on to, and all the nodes will have to be remembered.
 
 Question 4
 
-# Start by discarding trivial rows, storing the remaining rows with their node value in a dictionary as a key, and a list of their children as values. 0: [1] would be one such dictionary entry for the example in the question definition.
-# We then recursively find all parents for each of n1, n2 all the way to the root.
-# Compare the lists of ancestors. We should return the first one that appears in both. We 'for' loop through one, check if it's in the other, and if it is, we return that value immediately, ending the function qeustion4().
+We start by discarding trivial (all zero) rows, storing the remaining rows with their node value in a dictionary as a key, and a list of their children as values. 0: [1] would be one such dictionary entry for the example in the question definition.
+We then recursively find all parents for each of n1, n2 all the way to the root.
+We compare the lists of ancestors. We return the first one that appears in both.
+
+Compute complexity is about O(log(n)), since on average we'd only need to find one more parent for twice as many nodes. Memory complexity is about O(n), since we need to store representations of the BST that map basically 1 to 1 with how many nodes were in the original tree.
 
 Question 5
 
-A linked list is essentially a maximally unbalanced binary tree, i.e., a series of nodes connected by single edges such that the very first and last nodes have only one edge, but all nodes in between them have exactly two edges, each connecting to a neighboring node in a chain. We can therefore build a linked list using just the Node class, and then begin with a 'root' and add neighbors exclusively to either the right or left side of the root and then exclusively that same side for each of its children. We'd have something like root.left.left.left.left and so on, or something similar for the right.  
+A linked list is essentially a maximally unbalanced binary tree, i.e., a series of nodes connected by single edges such that the very first and last nodes have only one edge, but all nodes in between them have exactly two edges, each connecting to a neighboring node in a chain. We can therefore build a linked list using just the Node class, and then begin with a 'root' and add neighbors exclusively to either the right or left side of the root and then exclusively that same side for each of its children. We'd have something like root.left.left.left.left and so on, or something similar for the right.
+
+Compute complexity is O(m), where m is the place of the node we're looking for, since we need to keep recursively looping until we've reached the node we're interested in. Memory complexity is basically O(1) since we don't need any intermediate structures to solve the problem.  

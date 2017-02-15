@@ -8,13 +8,10 @@ class Node(object):
 def question5(ll, m):
     output = 0
     def search_list(start, val):
-        # print start.value, val
         if val == 0:
-            # print 'should be returning', start.value
             output = start.value
             return start.value
         elif start:
-            # print 'start defined'
             if start.right:
                 return search_list(start.right, val-1)
             elif start.left:
