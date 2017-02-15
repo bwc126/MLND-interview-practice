@@ -31,4 +31,4 @@ Question 5
 
 A linked list is essentially a maximally unbalanced binary tree, i.e., a series of nodes connected by single edges such that the very first and last nodes have only one edge, but all nodes in between them have exactly two edges, each connecting to a neighboring node in a chain. We can therefore build a linked list using just the Node class, and then begin with a 'root' and add neighbors exclusively to either the right or left side of the root and then exclusively that same side for each of its children. We'd have something like root.left.left.left.left and so on, or something similar for the right.
 
-Compute complexity is O(m), where m is the place of the node we're looking for, since we need to keep recursively looping until we've reached the node we're interested in. Memory complexity is basically O(1) since we don't need any intermediate structures to solve the problem.  
+Compute complexity is O(m), where m is the place of the node we're looking for, since we need to keep recursively looping until we've reached the node we're interested in. Memory complexity is basically O(1) since we don't need any intermediate structures to solve the problem.
