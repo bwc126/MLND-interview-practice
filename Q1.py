@@ -3,14 +3,15 @@
 def question1(s='',t=''):
     # We can replace within s each character that's in t with some placeholder character (hyphen in this example), and then check to see if there's a string of placeholder characters within s that correspond to the length of t. Since we want all possible anagrams of t to be covered, any of the characters in t can be in any position within s, and as long as they're adjacent in s and there are at least as many in s as there are in t, we can confidently declare some anagram of t is within s.
 
-    # Use numbers to replace, not hyphens. 
+    # Use numbers to replace, not hyphens.
     if not s or not t:
         return
     test = ''
-    for char in t:
-        s = s.replace(char, '-')
     for i in range(len(t)):
-        test += '-'
+        test += str(i)
+    for char in range(len(t)):
+        s = s.replace(t[char], test[char])
+    print s, test
     if test in s:
         return True
     return False
@@ -23,3 +24,4 @@ print question1('udacity','uy') # Should be False
 print question1('sarsaparilla','apas') # Should be True
 print question1('','') # Should be None
 print question1() # Should be None
+print question1('aaab','bbba') # Should be False
