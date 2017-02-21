@@ -16,12 +16,12 @@
 # The signature question4(T, r, n1, n2) includes T, a binary matrix as described previously, r, a non-neg integer corresponding to the value of the root. n1, n2 are each non-neg ints representing the two nodes for which we need to find the greatest common ancestor node. We can assume n1, n2 might be in any order, that both nodes are in fact within the tree, and the BST conforms to standard rules for a BST.
 import copy
 def question4(T, r, n1, n2):
+    # We'll need to keep track of the lesser and greater node values to take full advantage of BST properties later on.
     n_1 = min(n1,n2)
     n_2 = max(n1,n2)
+    # Lacking a BST matrix is a non-starter.
     if not T:
         return
-    # Since r is the value of the root, we should look within T and find the list at that index value to see what children our root has. Ultimately, we need to find n1, n2's parents, and see if they're actually the same node, and if not, how far up the tree we need to look to find the greatest common ancestor for them. If the root is the immediate parent of n1,n2, then we've found our result. Otherwise, we need to keep moving up the tree until we find a parent node both n1,n2 have in common.
-
     # Start by discarding trivial rows, storing the remaining rows with their node value in a dictionary as a key, and a list of their children as values. 0: [1] would be one such dictionary entry for the example in the question definition.
     nodes = {}
     # print T
@@ -36,6 +36,7 @@ def question4(T, r, n1, n2):
             nodes[row] = children
 
     print nodes
+    # This is strictly for handling the cases where n1 or n2 aren't in the BST. We build a simple list of all nodes in the tree to make sure n1 and n2 are actually in it before doing any more unnecessary computation.
     all_nodes = []
     for children in nodes.values():
         for node in children:
@@ -44,38 +45,10 @@ def question4(T, r, n1, n2):
     print all_nodes
     if n1 not in all_nodes or n2 not in all_nodes:
         return
-    # We could look through the keys of 'nodes', and the first one we find that has a value between n1, n2 is our LCA.
+    # We could look through the keys of 'nodes', which will be every node that is a parent of any node in the tree, and the first one we find that has a value between n1, n2 is our LCA. This assumes the keys are in order of their level on the tree, but they don't need to be in order relative to the other nodes on their level, because only nodes between n1 and n2 in value can be a parent of both.
     for parent in nodes.keys():
         if parent < n_2 and parent > n_1:
             return parent
-    # print T == M
-    # We then recursively find all parents for each of n1, n2 all the way to the root.
-    # def find_ancestors(val, ancestors, tree):
-    #     # print val, ancestors, tree
-    #     if val == r:
-    #         return ancestors
-    #     else:
-    #         for node in tree:
-    #             if val in tree[node]:
-    #                 ancestors.append(node)
-    #                 return find_ancestors(node, ancestors, tree)
-    #
-    #
-    # a_1 = []
-    # a_2 = []
-    # a_1 = find_ancestors(n1, a_1, nodes)
-    # a_2 = find_ancestors(n2, a_2, nodes)
-    # # print a_1, a_2
-    #
-    # # Compare the lists of ancestors. We should return the first one that appears in both. We 'for' loop through one, check if it's in the other, and if it is, we return that value immediately, ending the function qeustion4().
-    # if not a_1 or not a_2:
-    #     return
-    # for ancestor in a_1:
-    #     if ancestor in a_2:
-    #         return ancestor
-
-
-
 
 # Test Cases
 matrix = [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], # 0
